@@ -26,7 +26,7 @@ app.delete('/user/:id',User.delete)
 app.post('/dialog',Dialog.create)
 app.get('/dialog/:id',Dialog.index)
 
-app.post('/dialog',Dialog.create)
+app.post('/messages',Messages.create)
 app.get('/messages/:id',Messages.index)
 
 app.listen(PORT,()=>{
