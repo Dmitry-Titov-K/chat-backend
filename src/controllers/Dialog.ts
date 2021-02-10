@@ -1,40 +1,35 @@
 import express from 'express'
-import {UserModel} from '../Models'
+import { Schema } from 'mongoose';
+import {DialogModel} from '../Models'
 
-class UserController {
+class DialogController {
     async create(req:express.Request,res:express.Response) {
             const postData={
-                email:req.body.email,
-                fullname:req.body.fullname,
-                password:req.body.password
+                author:req.body.author,
+                partner:req.body.partner,
             }
-            const user = new UserModel(postData);
+            const dialog = new DialogModel(postData);
                 try {
-                    await user.save()
-                    console.log(`create${user.fullname}`)
-                    res.send(`create ${user.fullname}`)
+                    await dialog.save()
+                    res.send(`dialog create`)
                 } catch (error) {
-                    console.log(`ERROR::${error.message}`)
+                    console.log(`ERROR::dialog not create`)
                     res.send(error.message)
                 }
             }
-    getMe(){
+  /*   getMe(){
         // TODO: функция возвращающая данные о самом себе из аунтификации
-    }
-    async show(req:express.Request,res:express.Response){
-        const id:string = req.params.id
+    } */
+    async index(req:express.Request,res:express.Response){
+        const authorId:any = req.params.id
         try {
-          const result = await UserModel.findById(id)
-          if (result == null){
-              throw new Error()
-          }
-            res.status(200).json(result)
+          const result = await DialogModel.find({author:authorId}).populate(["author"])
+          res.json(result)
         } catch (error) {
             res.status(404).json({message:'user not found'})
         }
-        
     }  
-    async delete(req:express.Request,res:express.Response){
+   /*  async delete(req:express.Request,res:express.Response){
         const id:string = req.params.id
         try {
           const result = await UserModel.findOneAndDelete({_id:id})
@@ -47,7 +42,7 @@ class UserController {
             res.status(404).json({message:'not found'})
         }
         
-    }  
+    }   */
 }
 
-    export default UserController
+    export default DialogController
