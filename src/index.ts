@@ -2,12 +2,15 @@ import { env } from "process";
 import express from 'express'
 import bodyParser from 'body-parser'
 import connect from './connect'
-import {UserController,DialogController} from './controllers/index'
+import {UserController,DialogController, MessagesController} from './controllers/index'
+
 
 const app = express();
 
 const User = new UserController()
 const Dialog = new DialogController()
+const Messages = new MessagesController()
+
 const PORT = env.PORT || 3000
 
 connect()
@@ -22,6 +25,9 @@ app.delete('/user/:id',User.delete)
 
 app.post('/dialog',Dialog.create)
 app.get('/dialog/:id',Dialog.index)
+
+app.post('/dialog',Dialog.create)
+app.get('/messages/:id',Messages.index)
 
 app.listen(PORT,()=>{
     console.log(`server run on ${PORT} port`)

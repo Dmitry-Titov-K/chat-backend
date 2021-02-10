@@ -1,5 +1,4 @@
 import express from 'express'
-import { Schema } from 'mongoose';
 import {DialogModel} from '../Models'
 
 class DialogController {
