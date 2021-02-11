@@ -2,13 +2,17 @@ import { env } from "process";
 import express from "express";
 import bodyParser from "body-parser";
 import connect from "./connect";
+
 import {
   UserController,
   DialogController,
   MessagesController,
 } from "./controllers/index";
+import { updateLastSeen } from "./middleware";
 
 const app = express();
+
+app.use(updateLastSeen);
 
 const User = new UserController();
 const Dialog = new DialogController();
@@ -18,7 +22,9 @@ const PORT = env.PORT || 3000;
 
 connect();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  bodyParser.urlencoded({ extended: false })
+);
 
 app.use(bodyParser.json());
 

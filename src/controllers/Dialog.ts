@@ -36,7 +36,7 @@ class DialogController {
         // TODO: функция возвращающая данные о самом себе из аунтификации
     } */
   async index(req: express.Request, res: express.Response) {
-    const authorId: any = "60226e82dea6e71fecc0bbf2"; //TODO: исправить статику
+    const authorId: any = "6024003e86af7c2c5ea00345"; //TODO: исправить статику
     try {
       const result = await DialogModel.findOne({ author: authorId }).populate([
         "author",
