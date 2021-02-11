@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run build:live",
     "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
+    "build:live": "nodemon --watch \"src/**/*.ts\" --ext ts --exec \"ts-node src/index.ts\"",
     "test": "json-server --watch db.json --port 3004"
   },
   "author": "",
@@ -15,6 +15,7 @@
     "@types/node": "^14.14.25",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "eslint": "^7.19.0",
     "express": "^4.17.1",
     "json": "^10.0.0",
     "mongo": "^0.1.0",
