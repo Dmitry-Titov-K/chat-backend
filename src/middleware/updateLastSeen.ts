@@ -1,4 +1,5 @@
 import express from "express";
+import connect from "../connect";
 import { UserModel } from "../Models";
 
 export default async (
@@ -8,12 +9,13 @@ export default async (
 ) => {
   try {
     await UserModel.updateOne(
-      { _id: "6024003e86af7c2c5ea00345" },
+      { _id: "60226e82dea6e71fecc0bbf2" },
       { last_seen: new Date() }
     );
     console.log("last seen update");
-  } catch {
-    throw new Error();
+  } catch (error) {
+    console.log(error.message);
+    connect();
   }
   next();
 };

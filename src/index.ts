@@ -1,7 +1,7 @@
-import { env } from "process";
 import express from "express";
 import bodyParser from "body-parser";
 import connect from "./connect";
+import dotenv from "dotenv";
 
 import {
   UserController,
@@ -18,13 +18,11 @@ const User = new UserController();
 const Dialog = new DialogController();
 const Messages = new MessagesController();
 
-const PORT = env.PORT || 3000;
+dotenv.config();
 
 connect();
 
-app.use(
-  bodyParser.urlencoded({ extended: false })
-);
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 
@@ -39,6 +37,6 @@ app.post("/messages", Messages.create);
 app.get("/messages", Messages.index);
 app.delete("/messages/:id", Messages.delete);
 
-app.listen(PORT, () => {
-  console.log(`server run on ${PORT} port`);
+app.listen(process.env.PORT, () => {
+  console.log(`server run on ${process.env.PORT} port`);
 });
